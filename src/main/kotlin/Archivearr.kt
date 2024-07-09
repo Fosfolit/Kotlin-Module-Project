@@ -1,69 +1,60 @@
-class ArchiveArr {
-    private val scan: GeneralScanner = GeneralScanner()
-    private var arr :MutableList<Archive> = mutableListOf()
 
-    private fun printMenu(){
-        println("Доброго времени суток")
-        println("1.Посмотреть Архивы")
-        println("2.Выбрать Архив")
-        println("3.Создать Архив")
-        println("4.Выйти")
+class ArchiveArr : Function<Archive>("start") {
+    private val scan: GeneralScanner = GeneralScanner()
+    fun start(){
+        menu(scan)
     }
 
-    fun start(){
+    private fun printMenu(){
+        println("0.Выйти")
+        println("1.Выбрать Архив")
+        println("2.Создать Архив")
+        println("3.Удалить Архив")
+    }
+
+    private fun menu(scan: GeneralScanner){
+        println("Доброго времени суток")
         printMenu()
         var inpu : Int  = -1
         while(true) {
-            scan.takeInt { it -> inpu = it}
+            scan.takeInt {inpu = it}
             when (inpu) {
-                1 -> {
-                    println("Смотрим архивы")
-                    viewingArchives()
-                }
-                2 -> selectArchives()
-                3 -> addArchive()
-                4 -> return
+                0 -> return
+                1 -> selectArchives(scan)
+                2 -> addArchive()
+                3 -> selectArchivesDelete(scan)
                 else -> println("Невернный ввод")
             }
+            printMenu()
+
         }
     }
 
     private fun addArchive(){
-        scan.takeName { it -> arr.add(Archive(it)) }
+        scan.takeName {arr.add(Archive(it)) }
+        println("Архив успешно создан")
     }
 
-    private fun selectArchives(){
-        println("Выберите архив")
-        var inpu : Int  = -1
-        println("0. Вернутся назад")
-        viewingArchives()
-        while(true){
-            scan.takeInt { it -> inpu = it}
-            if(inpu == 0 ) {
-                return
-            } else {
-                if (inpu >= 1 && inpu <= arr.size) {
-                    arr[inpu-1].menu(scan,{it->deletingArchive(it)})
-                    return
-                }else {
-                    println("Неверный ввод")
-                }
-            }
+    private fun selectArchives(scan :GeneralScanner){
+        selectMenu()
+        val inpu : Int = selected(scan)
+        if(inpu == 0 ) {
+            return
         }
+        arr[inpu-1].menu(scan)
     }
 
-    private fun viewingArchives(){
-        var i = 1
-        if(arr.size == 0){
-            println("Пусто")
-        } else {
-            arr.forEach() {
-                println(i.toString()+ ". " + it.name)
-                i++
-            }
+    private fun selectArchivesDelete(scan :GeneralScanner){
+        selectMenuDelete()
+        val inpu : Int = selected(scan)
+        if(inpu == 0 ) {
+            return
         }
+        delete(inpu)
     }
-    private fun deletingArchive(archive: Archive){
-        arr.remove(archive)
+
+    override fun whatPrintNeed(count: Int, it: Archive) {
+        println((count+1).toString() + ". " +it.name)
     }
+
 }

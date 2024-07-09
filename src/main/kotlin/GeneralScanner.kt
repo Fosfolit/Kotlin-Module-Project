@@ -6,17 +6,11 @@ class GeneralScanner {
     fun takeName(
         onTakeName :(scan: String) -> Unit
     ){
-        while (true) {
             println("Введите название")
             if (scanner.hasNextLine()) {
                 onTakeName(scanner.nextLine())
-                
                 return
-            } else {
-                println("Неверный ввод")
-                cleanInput()
             }
-        }
     }
     fun takeInt( onTakeName :(scan: Int) -> Unit
     ) {
@@ -27,13 +21,13 @@ class GeneralScanner {
                 scanner.nextLine()
                 return
             } else {
-                println("Неверный ввод")
                 cleanInput()
             }
         }
     }
 
     private fun cleanInput(){
+            println("Неверный ввод")
             if (scanner.hasNextLine()) {
                 scanner.next()
             }
@@ -53,7 +47,6 @@ class GeneralScanner {
                         arr.add(io)
                     }
                 } else {
-                    println("Неверный ввод")
                     cleanInput()
                 }
             }

@@ -1,4 +1,4 @@
-fun main(args: Array<String>) {
-    val glo :ArchiveArr =ArchiveArr()
+fun main() {
+    val glo  = ArchiveArr()
     glo.start()
 }
