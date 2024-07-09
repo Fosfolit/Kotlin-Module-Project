@@ -21,7 +21,7 @@ open class Function<T>(open var name: String) {
 
     fun delete(count: Int) {
         arr.remove(arr[count - 1])
-        println("${this::class.simpleName} элемент успешно удалён")
+        println("Элемент успешно удалён")
 
     }
 
@@ -38,13 +38,13 @@ open class Function<T>(open var name: String) {
     }
 
     fun selectMenuDelete() {
-        println("Выберите ${this::class.simpleName} элемент для удаления")
+        println("Выберите элемент для удаления")
         println("0. Вернутся назад")
         viewing()
     }
 
     fun selectMenu() {
-        println("Выберите ${this::class.simpleName} элемент ")
+        println("Выберите элемент ")
         println("0. Вернутся назад")
         viewing()
     }

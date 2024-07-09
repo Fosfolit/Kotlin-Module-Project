@@ -17,7 +17,9 @@ open class Note (override var name : String) : Function<String>(name) {
                 0 -> return
                 1 -> rename(scan)
                 2 -> updatingTextNote(scan)
-                3 -> viewing()
+                3 -> {
+                    println("Выводим текст")
+                    viewing()}
                 else -> println("Невернный ввод")
             }
             printMenu()
